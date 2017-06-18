@@ -14,7 +14,7 @@ bench_df2          <- reshape2:::melt(bench_df,
                                       measure.vars=c("no","yes"))
 colnames(bench_df2) <- c("N", "repartion", "time")
 bench_df2$N    <-  as.numeric(as.vector(bench_df2$N))
-bench_df2$time <-  as.numeric(bench_df2$time)
+bench_df2$time <-  as.numeric(as.vector(bench_df2$time))
 gt <-  theme(
              panel.background = element_blank(), 
              axis.text.x      = element_text(face="bold", color="#000000", size=11),
@@ -23,8 +23,8 @@ gt <-  theme(
              axis.title.y     = element_text(face="bold", color="#000000", size=11)
             )  
 p1                 <- ggplot(bench_df2,
-				aes(x=N, y=time, colour=repartion)) +
-		             geom_smooth(formula="y~x") + xlab("Number of random draws") + ylab("Wall Clock (Seconds)") +
+				aes(x=N, y=time, colour=repartion)) + 
+		             geom_smooth(formula="y~x", span=0.3) + xlab("Number of random draws") + ylab("Wall Clock (Seconds)") +
                              ggtitle("Effect of repartition in count: Gaussian Random Numbers") + 
                              gt
 grid.newpage()
