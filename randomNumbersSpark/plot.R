@@ -8,7 +8,7 @@ library(grid)
 library(gridExtra)
 library(ggplot2)
 library(reshape)
-bench_df           <- read.csv2("bench.csv", header=FALSE, sep=",", colClasses="numeric")
+bench_df           <- read.csv2("bench.csv", header=FALSE, sep=",")
 colnames(bench_df) <- c("N", "no", "yes")
 bench_df2          <- reshape2:::melt(bench_df,
                                       measure.vars=c("no","yes"))
@@ -33,4 +33,4 @@ g <- arrangeGrob(p1, bottom = textGrob(footnote, x = 0, hjust = -0.1, vjust=0.1,
 
 png(file="spark_repartition_random.png")
 grid.draw(g)
-dev.off
+dev.off()
